@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: true
+  tasks:
+   - name: Install apache httpd
+     ansible.builtin.apt:
+       name: apache2
+       state: present
+
+   - name: Copy HTML file to server
+     ansible.builtin.copy:
+       src: /home/ec2-user/scapu.html
+       dest: /var/www/html
+       owner: root
+       group: root
+       mode: '0644'
+
+   - name: Copy HTML file to server
+     ansible.builtin.copy:
+       src: /home/ec2-user/scapu.html
+       dest: /var/www/html
+       owner: root
+       group: root
+       mode: '0644'
+  
+   - name: Enable HTTPD
+     ansible.builtin.shell: sudo systemctl enable apache2
